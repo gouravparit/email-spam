@@ -1,12 +1,14 @@
-# 📧 Email Spam Detection
+# 📩 SMS Spam Classifier
 
-A Machine Learning project that classifies an email or message as **Spam** or **Not Spam** using Natural Language Processing (NLP).
+A Python-based Machine Learning application that analyzes text messages and predicts whether they are **Spam** or **Not Spam**.
 
-## 🎯 Objective
+## 📌 Project Overview
 
-The objective of this project is to build an end-to-end Machine Learning system that can detect whether a given message is spam.
+This project demonstrates a complete Machine Learning workflow for text classification. The system preprocesses messages, converts text into numerical features using TF-IDF, and uses Logistic Regression to make predictions.
 
-## 🛠️ Technologies Used
+A Streamlit interface is included so users can test their own messages.
+
+## 🔧 Tech Stack
 
 - Python
 - Pandas
@@ -19,54 +21,59 @@ The objective of this project is to build an end-to-end Machine Learning system 
 - Matplotlib
 - Seaborn
 
-## 📊 Dataset
+## 📂 Dataset Information
 
-The project uses the **SMS Spam Collection** dataset.
+The model is trained using the **SMS Spam Collection** dataset.
 
-The dataset contains two main columns:
+The cleaned dataset contains:
 
-- `label` — Spam or Ham (Not Spam)
-- `message` — Text message
+| Category | Count |
+|---|---:|
+| Not Spam | 4,516 |
+| Spam | 653 |
+| **Total** | **5,169** |
 
-After removing unnecessary columns and duplicate messages:
+The original dataset contained some unnecessary columns, which were removed during preprocessing.
 
-- Total messages: **5,169**
-- Not Spam: **4,516**
-- Spam: **653**
-
-## 🔄 Machine Learning Workflow
+## ⚙️ Processing Pipeline
 
 ```text
-Dataset
-   ↓
+Raw Dataset
+     ↓
 Data Cleaning
-   ↓
-Train/Test Split
-   ↓
-TF-IDF Vectorization
-   ↓
+     ↓
+Text Preprocessing
+     ↓
+Train / Test Split
+     ↓
+TF-IDF Feature Extraction
+     ↓
 Logistic Regression
-   ↓
-Model Evaluation
-   ↓
-Save Model & Vectorizer
-   ↓
-Streamlit UI
-   ↓
-Spam / Not Spam Prediction
+     ↓
+Performance Testing
+     ↓
+Model Export
+     ↓
+Streamlit Interface
 ```
 
-## 🤖 Model
+## 🧠 Classification Method
 
-The project uses **Logistic Regression** for classification.
+### TF-IDF
 
-TF-IDF (Term Frequency-Inverse Document Frequency) is used to convert text messages into numerical features that can be processed by the Machine Learning model.
+TF-IDF converts the words in each message into numerical values based on their importance within the dataset.
 
-## 📈 Model Evaluation
+### Logistic Regression
 
-The model was evaluated using the following metrics:
+The generated TF-IDF features are given to a Logistic Regression classifier, which predicts the category of the message.
 
-| Metric | Score |
+The trained model and TF-IDF vectorizer are saved using **Joblib**.
+
+## 📊 Results
+
+The model was tested using several classification metrics:
+
+| Evaluation Metric | Result |
 |---|---:|
 | Accuracy | 96.71% |
 | Precision | 98.99% |
@@ -76,45 +83,43 @@ The model was evaluated using the following metrics:
 
 ### Confusion Matrix
 
-The confusion matrix shows how many messages were correctly and incorrectly classified.
+The test results were:
 
-The model correctly classified:
+- **902** Not Spam messages correctly identified
+- **98** Spam messages correctly identified
+- **1** Not Spam message incorrectly classified as Spam
+- **33** Spam messages incorrectly classified as Not Spam
 
-- 902 Not Spam messages
-- 98 Spam messages
+## 🖥️ Web Application
 
-It incorrectly classified:
+The Streamlit interface provides a simple way to test the trained classifier.
 
-- 1 Not Spam message as Spam
-- 33 Spam messages as Not Spam
+Users can:
 
-## 💻 Streamlit Application
+- Enter a message.
+- Get a Spam / Not Spam prediction.
+- See the estimated Spam probability.
+- View basic message information such as word and character count.
 
-The Streamlit application allows the user to:
+## 📷 Application Screenshots
 
-1. Enter an email or message.
-2. Check whether it is Spam or Not Spam.
-3. View the Spam probability.
-4. View the message summary, including character and word count.
+### Spam Detection
 
-## ## 📸 Screenshots
+![Spam Prediction](screenshots/spam_prediction_1.png)
 
-### Spam Prediction
+![Spam Prediction](screenshots/spam_prediction_2.png)
 
-![Spam Prediction 1](screenshots/spam_prediction_1.png)
+### Not Spam Detection
 
-![Spam Prediction 2](screenshots/spam_prediction_2.png)
+![Not Spam Prediction](screenshots/not_spam_prediction_1.png)
 
-### Not Spam Prediction
+![Not Spam Prediction](screenshots/not_spam_prediction_2.png)
 
-![Not Spam Prediction 1](screenshots/not_spam_prediction_1.png)
-
-![Not Spam Prediction 2](screenshots/not_spam_prediction_2.png)
-
-### Confusion Matrix
+### Model Evaluation
 
 ![Confusion Matrix](screenshots/confusion_matrix.png)
-## 📁 Project Structure
+
+## 📁 Repository Layout
 
 ```text
 email_spam_detect/
@@ -137,45 +142,47 @@ email_spam_detect/
 └── README.md
 ```
 
-## ▶️ How to Run
+## 🚀 Running the Project
 
-### 1. Clone the repository
+### Clone the Repository
 
 ```bash
 git clone <YOUR_GITHUB_REPOSITORY_URL>
 ```
 
-### 2. Open the project folder
+### Enter the Project Directory
 
 ```bash
 cd email_spam_detect
 ```
 
-### 3. Install required libraries
+### Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Run the Streamlit application
+### Start the Application
 
 ```bash
 streamlit run app.py
 ```
 
-The application will open in your browser.
+The Streamlit application will then be available in your browser.
 
 ## ⚠️ Limitations
 
-- The model is trained on a specific SMS spam dataset.
-- Some new or unusual spam messages may be incorrectly classified.
-- The model may not perform equally well on every type of email.
-- The current model uses only text-based features.
+- The training data is based on the SMS Spam Collection dataset.
+- Certain unfamiliar spam patterns may not be detected correctly.
+- Performance can vary when the model receives real-world email content.
+- The current classifier mainly relies on the text of the message.
 
-## 🚀 Future Improvements
+## 🔮 Possible Enhancements
 
-- Use a larger email dataset.
-- Add features such as number of links and special characters.
-- Try other Machine Learning models.
-- Improve text preprocessing.
-- Deploy the Streamlit application online.
+Future versions could include:
+
+- Training with a larger and more diverse dataset.
+- Additional message features such as links and special characters.
+- Comparison with other classification algorithms.
+- More advanced text preprocessing.
+- Online deployment of the Streamlit application.
